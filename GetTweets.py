@@ -1,3 +1,4 @@
+import re
 from twython import Twython, TwythonError
 from os.path import join
 
@@ -38,8 +39,12 @@ def search_and_write(user):
     print(save_file)
     with open(save_file, 'w') as f:
         for tweet in search_results:
+            # Tweets stored in file by newlines
             if '\n' not in tweet['text']:
-                f.write(tweet['text'].encode('utf-8') + '\n')
+                text = tweet['text']
+                cleaned_text = ' '.join([word for word in text.split() 
+                    if 'https://t.co' not in word])
+                f.write(cleaned_text.encode('utf-8') + '\n')
                 f.write('{} {}\n'.format(tweet['retweet_count'], tweet['favorite_count']))
 
 def main():
