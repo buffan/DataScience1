@@ -42,7 +42,7 @@ def search_and_write(query_text):
             # Filter tweets with newlines so tweets can be stored in file 
             # through newlines
             if '\n' not in tweet['text']:
-                f.write(tweet['text'] + '\n')
+                f.write(tweet['text'].encode('utf-8') + '\n')
                 f.write("{} {}\n".format(tweet['retweet_count'], 
                         tweet['favorite_count']))
 
