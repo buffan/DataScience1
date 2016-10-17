@@ -1,4 +1,3 @@
-import re
 from twython import Twython, TwythonError
 from os.path import join
 
